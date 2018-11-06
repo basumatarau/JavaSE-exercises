@@ -6,17 +6,18 @@ public class Composing {
     private static int counter = 0;
     private int ID = ++counter;
 
-    Composing(Shared sharedObj){
+    Composing(Shared sharedObj) {
         this.sharedInstance = sharedObj;
         sharedObj.addReference();
     }
 
-    void dispose(){
-        System.out.println("Disposing of "+this);
+    void dispose() {
+        System.out.println("Disposing of " + this);
         this.sharedInstance.dispose();
     }
+
     @Override
-    public String toString(){
-        return "Composing obj#"+ID;
+    public String toString() {
+        return "Composing obj#" + ID;
     }
 }
