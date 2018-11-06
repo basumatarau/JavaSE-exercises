@@ -1,4 +1,4 @@
-package com.testProject.test0005;
+package com.testProject.PatternsAdapter;
 
 import java.io.IOException;
 import java.nio.CharBuffer;

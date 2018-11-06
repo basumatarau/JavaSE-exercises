@@ -1,6 +1,8 @@
 package com.testProject.test0001;
 
 public class SomeClass implements InterfaceC, InterfaceB {
+
+
     public static void main(String[] args) {
         SomeClass sc = new SomeClass();
         sc.print();
