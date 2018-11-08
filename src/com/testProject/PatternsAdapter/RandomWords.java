@@ -36,7 +36,7 @@ public class RandomWords implements Readable {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(new RandomWords(10));
-        while(scanner.hasNext()){
+        while (scanner.hasNext()) {
             System.out.println(scanner.next());
         }
     }

@@ -5,7 +5,7 @@ public abstract class Event {
     private long eventTime;
 
     public Event(long delayTime) {
-        this.delayTime = 1000000*delayTime;
+        this.delayTime = 1000000 * delayTime;
         start();
     }
 

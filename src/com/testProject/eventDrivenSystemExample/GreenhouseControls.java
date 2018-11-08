@@ -4,6 +4,7 @@ public class GreenhouseControls extends Controller {
     private boolean lights = false;
     private boolean water = false;
     private String thermostat = "day";
+    protected boolean humidifierIsOn = false;
 
     public class LightsOn extends Event {
         public LightsOn(long delayTime) {
@@ -21,13 +22,14 @@ public class GreenhouseControls extends Controller {
         }
     }
 
-    public class LightsOff extends Event{
-        public LightsOff(long delayTime){
+    public class LightsOff extends Event {
+        public LightsOff(long delayTime) {
             super(delayTime);
         }
+
         @Override
         public void action() {
-            lights= false;
+            lights = false;
         }
 
         @Override
@@ -36,10 +38,11 @@ public class GreenhouseControls extends Controller {
         }
     }
 
-    public class WaterOn extends Event{
-        public WaterOn(long delayTime){
+    public class WaterOn extends Event {
+        public WaterOn(long delayTime) {
             super(delayTime);
         }
+
         @Override
         public void action() {
             water = true;
@@ -51,8 +54,8 @@ public class GreenhouseControls extends Controller {
         }
     }
 
-    public class WaterOff extends Event{
-        public WaterOff(long delayTime){
+    public class WaterOff extends Event {
+        public WaterOff(long delayTime) {
             super(delayTime);
         }
 
@@ -67,8 +70,8 @@ public class GreenhouseControls extends Controller {
         }
     }
 
-    public class ThermostatDay extends Event{
-        public ThermostatDay(long delayTime){
+    public class ThermostatDay extends Event {
+        public ThermostatDay(long delayTime) {
             super(delayTime);
         }
 
@@ -83,14 +86,14 @@ public class GreenhouseControls extends Controller {
         }
     }
 
-    public class ThermostatNight extends Event{
-        public ThermostatNight(long delayTime){
+    public class ThermostatNight extends Event {
+        public ThermostatNight(long delayTime) {
             super(delayTime);
         }
 
         @Override
         public void action() {
-            thermostat="night";
+            thermostat = "night";
         }
 
         @Override
@@ -99,10 +102,11 @@ public class GreenhouseControls extends Controller {
         }
     }
 
-    public class Bell extends Event{
-        public Bell(long delayTime){
+    public class Bell extends Event {
+        public Bell(long delayTime) {
             super(delayTime);
         }
+
         @Override
         public void action() {
             addEvent(new Bell(delayTime));
@@ -114,10 +118,10 @@ public class GreenhouseControls extends Controller {
         }
     }
 
-    public class Restart extends Event{
+    public class Restart extends Event {
         private Event[] events;
 
-        public Restart(long delaytime, Event[] events){
+        public Restart(long delaytime, Event[] events) {
             super(delaytime);
             this.events = events;
             for (Event event : events) {
@@ -141,8 +145,8 @@ public class GreenhouseControls extends Controller {
         }
     }
 
-    public class Terminate extends Event{
-        public Terminate(long delayteime){
+    public class Terminate extends Event {
+        public Terminate(long delayteime) {
             super(delayteime);
         }
 
