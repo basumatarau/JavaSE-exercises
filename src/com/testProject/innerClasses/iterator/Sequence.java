@@ -1,6 +1,8 @@
 package com.testProject.innerClasses.iterator;
 
-public class Sequence {
+import java.util.Iterator;
+
+public class Sequence implements Iterable{
     private Object[] items;
     private int next = 0;
     public Sequence(int len){
@@ -10,6 +12,22 @@ public class Sequence {
         if(next<items.length){
             items[next++] = item;
         }
+    }
+
+    @Override
+    public Iterator iterator() {
+        return new Iterator<Object>() {
+            private int count = 0;
+            @Override
+            public boolean hasNext() {
+                return count<items.length;
+            }
+
+            @Override
+            public Object next() {
+                return items[count++];
+            }
+        };
     }
 
     class SequenceSelector implements Selector{
@@ -38,6 +56,10 @@ public class Sequence {
         Selector iterator = sequence.getSelector();
         while(iterator.hasNext()){
             System.out.println(iterator.next());
+        }
+
+        for(Iterator it = sequence.iterator();it.hasNext();){
+            System.out.println(it.next());
         }
     }
 }
