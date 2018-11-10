@@ -1,33 +1,52 @@
 package com.testProject.ExceptionHandjlingExamples;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class FailingConstructor {
-    private static String fileContent;
+    private BufferedReader bufferedReader;
 
-    public String getFileContent() {
-        return fileContent;
+    public String getLine() throws IOException{
+        String result = null;
+        if(bufferedReader.ready()){
+            result = bufferedReader.readLine();
+        }
+        return result;
     }
 
-    FailingConstructor(String filename) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(filename)));
-        StringBuilder sb = new StringBuilder();
-        while (bufferedReader.ready()) {
-            sb.append(bufferedReader.readLine()).append('\n');
+    FailingConstructor(String filename) throws Exception {
+        FileReader reader = null;
+        BufferedReader br = null;
+        try {
+            File file = new File(filename);
+            reader = new FileReader(file);
+            br = new BufferedReader(reader);
+        } catch (FileNotFoundException e) {
+            System.out.println("couldn't open file: " + filename);
+        } catch (Exception e) {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e2) {
+                System.out.println("resource disposal error: " + filename);
+            }
+            throw e;
+        } finally {
+            bufferedReader = br;
         }
-        fileContent = sb.toString();
     }
 
     public static void main(String[] args) {
-        String path = System.getProperty("user.dir")+File.separator+"src"+
-                File.separator+ FailingConstructor.class.getName().replaceAll("[.]",File.separator)+".java";
+        String path = System.getProperty("user.dir") + File.separator + "src" +
+                File.separator + FailingConstructor.class.getName().replaceAll("[.]", File.separator) + ".java";
+
         try {
+            String line;
             FailingConstructor failingConstructor = new FailingConstructor(path);
-            System.out.println(failingConstructor.getFileContent());
-        }catch (IOException e){
+            while((line=failingConstructor.getLine())!=null){
+                System.out.println(line);
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
