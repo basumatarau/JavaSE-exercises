@@ -1,4 +1,4 @@
-package com.testProject.ReflectionAPI.RTTIisInstanceOf;
+package com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,14 +8,14 @@ public class ForNameCreator extends PetCreator{
     private static List<Class<? extends Pet>> types = new ArrayList<>();
 
     private static String[] typeNames = {
-            "com.testProject.ReflectionAPI.RTTIisInstanceOf.Cat",
-            "com.testProject.ReflectionAPI.RTTIisInstanceOf.Dog",
-            "com.testProject.ReflectionAPI.RTTIisInstanceOf.EgiptianMau",
-            "com.testProject.ReflectionAPI.RTTIisInstanceOf.Hamster",
-            "com.testProject.ReflectionAPI.RTTIisInstanceOf.Mouse",
-            "com.testProject.ReflectionAPI.RTTIisInstanceOf.Mutt",
-            "com.testProject.ReflectionAPI.RTTIisInstanceOf.Pug",
-            "com.testProject.ReflectionAPI.RTTIisInstanceOf.Rat"
+            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.Cat",
+            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.Dog",
+            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.EgiptianMau",
+            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.Hamster",
+            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.Mouse",
+            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.Mutt",
+            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.Pug",
+            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.Rat"
     };
 
     static{

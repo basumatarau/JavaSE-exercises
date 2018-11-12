@@ -1,4 +1,4 @@
-package com.testProject.ReflectionAPI.RTTIisInstanceOf;
+package com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop;
 
 public class EgiptianMau extends Cat {
     public EgiptianMau(String name) {
