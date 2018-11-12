@@ -7,8 +7,8 @@ public class PetCount3 {
 
     static class PetCounter extends LinkedHashMap<Class<? extends Pet>, Integer> {
         PetCounter(){
-            for (Class<? extends Pet> type : LiteralPetCreator.allTypes) {
-                put(type, 0);
+            for (Factory<? extends Pet> factory : LiteralPetCreator.allFactories) {
+                put(factory.create().getClass(), 0);
             }
         }
 

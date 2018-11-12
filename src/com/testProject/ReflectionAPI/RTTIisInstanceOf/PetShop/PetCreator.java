@@ -7,16 +7,12 @@ import java.util.Random;
 
 public abstract class PetCreator {
     private Random rand = new Random(47);
-    public abstract List<Class<? extends Pet>> types();
+    public abstract List<Factory<? extends Pet>> register();
 
     public Pet getRandomPet(){
-        try{
-            return types().
-                    get(rand.nextInt(types().size()))
-                    .newInstance();
-        }catch (InstantiationException | IllegalAccessException e){
-            throw new RuntimeException(e);
-        }
+        return register().
+                get(rand.nextInt(register().size()))
+                .create();
     }
 
     public Pet[] getRandomPetArray(int size){

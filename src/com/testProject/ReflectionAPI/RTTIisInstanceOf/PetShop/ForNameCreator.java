@@ -5,17 +5,17 @@ import java.util.List;
 
 public class ForNameCreator extends PetCreator{
 
-    private static List<Class<? extends Pet>> types = new ArrayList<>();
+    private static List<Factory<? extends Pet>> factories = new ArrayList<>();
 
     private static String[] typeNames = {
-            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.Cat",
-            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.Dog",
-            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.EgiptianMau",
-            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.Hamster",
-            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.Mouse",
-            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.Mutt",
-            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.Pug",
-            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.Rat"
+            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.Cat$Factory",
+            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.Dog$Factory",
+            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.EgiptianMau$Factory",
+            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.Hamster$Factory",
+            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.Mouse$Factory",
+            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.Mutt$Factory",
+            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.Pug$Factory",
+            "com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.Rat$Factory"
     };
 
     static{
@@ -26,11 +26,11 @@ public class ForNameCreator extends PetCreator{
     private static void loader(){
         try{
             for (String typeName : typeNames) {
-                types.add(
-                        (Class<? extends Pet>)Class.forName(typeName)
+                factories.add(
+                        ((Class<Factory<? extends Pet>>)Class.forName(typeName)).newInstance()
                 );
             }
-        }catch (ClassNotFoundException e){
+        }catch (ClassNotFoundException | IllegalAccessException | InstantiationException e){
             throw new RuntimeException(e);
         }
     }
@@ -38,14 +38,14 @@ public class ForNameCreator extends PetCreator{
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Class<? extends Pet> type : types) {
-            sb.append(type.getSimpleName()).append(", ");
+        for (Factory<? extends Pet> factory : factories) {
+            sb.append(factory.getClass().getSimpleName()).append(", ");
         }
         return sb.toString();
     }
 
     @Override
-    public List<Class<? extends Pet>> types() {
-        return types;
+    public List<Factory<? extends Pet>> register() {
+        return factories;
     }
 }

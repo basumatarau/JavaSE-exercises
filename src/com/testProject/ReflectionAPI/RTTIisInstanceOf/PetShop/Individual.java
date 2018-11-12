@@ -8,4 +8,10 @@ public class Individual {
     Individual(String name){
         this.name = name;
     }
+    public static class Factory implements com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop.Factory{
+        @Override
+        public Object create() {
+            return new Individual();
+        }
+    }
 }

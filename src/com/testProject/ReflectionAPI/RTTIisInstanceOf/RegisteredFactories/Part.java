@@ -6,22 +6,26 @@ import java.util.Random;
 
 public class Part {
 
-    private static List<Factory<? extends Part>> register = new ArrayList<>();
+    private static List<Class<? extends Part>> register = new ArrayList<>();
 
     static {
-        register.add(new AirFilter.Factory());
-        register.add(new CabinAirFilter.Factory());
-        register.add(new FanBelt.Factory());
-        register.add(new FuelFilter.Factory());
-        register.add(new GeneratoryBelt.Factory());
-        register.add(new OilFilter.Factory());
+        register.add(AirFilter.class);
+        register.add(CabinAirFilter.class);
+        register.add(FanBelt.class);
+        register.add(FuelFilter.class);
+        register.add(GeneratoryBelt.class);
+        register.add(OilFilter.class);
     }
 
     private static Random rand = new Random(47);
 
     public static Part createRandomPart() {
-        Factory<? extends Part> factory = register.get(rand.nextInt(register.size()));
-        return factory.create();
+        Class<? extends Part> partClass = register.get(rand.nextInt(register.size()));
+        try {
+            return partClass.newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

@@ -3,7 +3,7 @@ package com.testProject.ReflectionAPI.RTTIisInstanceOf.PetShop;
 import java.util.List;
 
 public class Pets {
-    public static final PetCreator creator = new LiteralPetCreator();
+    public static final PetCreator creator = new ForNameCreator();
 
     public static Pet randomPet(){
         return creator.getRandomPet();
