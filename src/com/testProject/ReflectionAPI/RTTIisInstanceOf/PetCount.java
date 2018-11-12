@@ -46,5 +46,7 @@ public class PetCount {
 
     public static void main(String[] args) {
         countPets(new ForNameCreator());
+        System.out.println("---");
+        countPets(new LiteralPetCreator());
     }
 }
