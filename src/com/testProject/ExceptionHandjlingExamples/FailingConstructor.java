@@ -5,7 +5,7 @@ import java.io.*;
 public class FailingConstructor {
     private BufferedReader bufferedReader;
 
-    public String getLine() throws IOException{
+    String getLine() throws IOException{
         String result = null;
         if(bufferedReader.ready()){
             result = bufferedReader.readLine();
@@ -36,19 +36,28 @@ public class FailingConstructor {
         }
     }
 
+    void dispose(){
+        try{
+            bufferedReader.close();
+        }catch (IOException e){
+            System.out.println("disposal error");
+        }
+    }
+
     public static void main(String[] args) {
         String path = System.getProperty("user.dir") + File.separator + "src" +
                 File.separator + FailingConstructor.class.getName().replaceAll("[.]", File.separator) + ".java";
-
         try {
             String line;
             FailingConstructor failingConstructor = new FailingConstructor(path);
             while((line=failingConstructor.getLine())!=null){
                 System.out.println(line);
             }
+            failingConstructor.dispose();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
 }

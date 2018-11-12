@@ -15,15 +15,24 @@ public class JGrep {
 
         Pattern pattern = Pattern.compile(args[args.length - 1]);
         Matcher matcher = pattern.matcher("");
-        openBFR(args[0]);
-        String line;
-        int lineNum = 0;
-        while ((line = getLine()) != null) {
-            matcher.reset(line);
-            ++lineNum;
-            while (matcher.find()) {
-                System.out.println("line " + lineNum + ": " + matcher.group() + ", pos:" + matcher.start());
+
+        String[] list = new File(args[0]).list();
+        if(list == null){
+            System.out.println("no files found in the directory: "+ args[0]);
+            System.exit(0);
+        }
+        for (String fileName : list) {
+            openBFR(fileName);
+            String line;
+            int lineNum = 0;
+            while ((line = getLine()) != null) {
+                matcher.reset(line);
+                ++lineNum;
+                while (matcher.find()) {
+                    System.out.println("line " + lineNum + ": " + matcher.group() + ", pos:" + matcher.start());
+                }
             }
+            dispose();
         }
     }
 
