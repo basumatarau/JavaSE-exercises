@@ -3,9 +3,9 @@ package com.testProject.ReflectionAPI.Proxy2;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
-public class DinamicProxyHandler implements InvocationHandler {
+public class DynamicProxyHandler implements InvocationHandler {
     private Object proxied;
-    public DinamicProxyHandler(Object proxied){
+    public DynamicProxyHandler(Object proxied){
         this.proxied = proxied;
     }
     @Override

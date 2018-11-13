@@ -14,7 +14,7 @@ public class SimpleDinamicProxy {
         consumer(realObject);
 
 
-        InvocationHandler handler = new DinamicProxyHandler(realObject);
+        InvocationHandler handler = new DynamicProxyHandler(realObject);
         Class<?> proxyClass = Proxy.getProxyClass(Interface.class.getClassLoader(), Interface.class);
         Interface proxyObj;
         try {
