@@ -2,7 +2,6 @@ package com.CodeHeap.Generics.GeneralizedMethods.ContainerCarrier;
 
 import com.CodeHeap.Generics.Generator.CoffeeGenerator.Generator;
 
-import java.text.NumberFormat;
 import java.util.Random;
 
 public class Cargo {
