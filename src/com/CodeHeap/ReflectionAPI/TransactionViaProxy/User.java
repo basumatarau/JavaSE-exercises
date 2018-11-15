@@ -3,7 +3,7 @@ package com.CodeHeap.ReflectionAPI.TransactionViaProxy;
 import java.io.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+//todo commit and rollback should be implemented within controller, rollback is fired by proxy object whenever exception is thrown...
 public class User implements ISelectGoods {
     private final int ID;
     private int[] goods = new int[3];
