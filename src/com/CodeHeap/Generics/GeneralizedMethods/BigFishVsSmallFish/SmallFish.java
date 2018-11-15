@@ -10,12 +10,7 @@ public class SmallFish {
     }
 
     public static Generator<SmallFish> getGenerator() {
-        return new Generator<SmallFish>() {
-            @Override
-            public SmallFish next() {
-                return new SmallFish();
-            }
-        };
+        return SmallFish::new;
     }
 
     @Override

@@ -10,12 +10,7 @@ public class BigFish {
     }
 
     public static Generator<BigFish> getGenerator() {
-        return new Generator<BigFish>() {
-            @Override
-            public BigFish next() {
-                return new BigFish();
-            }
-        };
+        return ()->new BigFish();
     }
 
     @Override
