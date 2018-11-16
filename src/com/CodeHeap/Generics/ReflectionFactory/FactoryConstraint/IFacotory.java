@@ -1,5 +1,5 @@
 package com.CodeHeap.Generics.ReflectionFactory.FactoryConstraint;
 
 public interface IFacotory<T> {
-    T create();
+    T create(Object... args);
 }

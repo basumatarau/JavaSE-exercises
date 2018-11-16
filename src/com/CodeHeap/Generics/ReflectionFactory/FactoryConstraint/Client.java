@@ -3,8 +3,8 @@ package com.CodeHeap.Generics.ReflectionFactory.FactoryConstraint;
 public class Client {
     public static void main(String[] args) {
 
-        System.out.println((new FactoryUser<>(new StringFactory()).getElement()));
+        System.out.println((new FactoryUser<>(new StringFactory(), "this is a test string".split(" ")).getElement()));
 
-        System.out.println((new FactoryUser<>(new IntegerFactory()).getElement()));
+        System.out.println((new FactoryUser<>(new IntegerFactory(), 1,2,3,4,5).getElement()));
     }
 }
