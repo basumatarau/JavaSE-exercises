@@ -8,14 +8,14 @@ public class ForNameCreator extends PetCreator{
     private static List<Factory<? extends Pet>> factories = new ArrayList<>();
 
     private static String[] typeNames = {
-            "com.CodeHeap.ReflectionAPI.RTTIisInstanceOf.PetShop.Cat$Factory",
-            "com.CodeHeap.ReflectionAPI.RTTIisInstanceOf.PetShop.Dog$Factory",
-            "com.CodeHeap.ReflectionAPI.RTTIisInstanceOf.PetShop.EgiptianMau$Factory",
-            "com.CodeHeap.ReflectionAPI.RTTIisInstanceOf.PetShop.Hamster$Factory",
-            "com.CodeHeap.ReflectionAPI.RTTIisInstanceOf.PetShop.Mouse$Factory",
-            "com.CodeHeap.ReflectionAPI.RTTIisInstanceOf.PetShop.Mutt$Factory",
-            "com.CodeHeap.ReflectionAPI.RTTIisInstanceOf.PetShop.Pug$Factory",
-            "com.CodeHeap.ReflectionAPI.RTTIisInstanceOf.PetShop.Rat$Factory"
+            "com.CodeHeap.ReflectionAPI.RTTIisInstanceOf.PetShop.Cat$SomeTypeFactory",
+            "com.CodeHeap.ReflectionAPI.RTTIisInstanceOf.PetShop.Dog$SomeTypeFactory",
+            "com.CodeHeap.ReflectionAPI.RTTIisInstanceOf.PetShop.EgiptianMau$SomeTypeFactory",
+            "com.CodeHeap.ReflectionAPI.RTTIisInstanceOf.PetShop.Hamster$SomeTypeFactory",
+            "com.CodeHeap.ReflectionAPI.RTTIisInstanceOf.PetShop.Mouse$SomeTypeFactory",
+            "com.CodeHeap.ReflectionAPI.RTTIisInstanceOf.PetShop.Mutt$SomeTypeFactory",
+            "com.CodeHeap.ReflectionAPI.RTTIisInstanceOf.PetShop.Pug$SomeTypeFactory",
+            "com.CodeHeap.ReflectionAPI.RTTIisInstanceOf.PetShop.Rat$SomeTypeFactory"
     };
 
     static{

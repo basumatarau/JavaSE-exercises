@@ -13,7 +13,7 @@ public class ArgGen {
 
     public static void main(String[] args) {
         List<String> strings = New.list();
-        strings.addAll(Arrays.asList("some test string goes here".split(" ")));
+        strings.addAll(Arrays.asList("some Test string goes here".split(" ")));
         for (String string : strings) {
             System.out.println(string);
         }

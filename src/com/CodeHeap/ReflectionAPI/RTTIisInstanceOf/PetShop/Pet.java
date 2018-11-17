@@ -1,7 +1,7 @@
 package com.CodeHeap.ReflectionAPI.RTTIisInstanceOf.PetShop;
 
 public class Pet extends Individual {
-    Pet(){
+    public Pet(){
         super();
     }
     Pet(String name){

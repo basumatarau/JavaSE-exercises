@@ -38,7 +38,7 @@ public class Cargo {
 
             return new Cargo(
                     names[rand.nextInt(names.length)],
-                    "test description",
+                    "Test description",
                     Math.round(rand.nextDouble()*1000)+0.99
             );
 

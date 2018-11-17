@@ -2,7 +2,7 @@ package com.CodeHeap.Generics.DataStructures.LinkedStackAndRandList;
 
 public class Runner {
     public static void main(String[] args) {
-        String testString = "This is a test to be tested with collections...";
+        String testString = "This is a Test to be tested with collections...";
         LinkedStack<String> stack = new LinkedStack<>();
         for (String word : testString.split(" ")) {
             stack.push(word);
