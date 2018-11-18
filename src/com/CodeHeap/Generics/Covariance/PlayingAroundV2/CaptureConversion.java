@@ -22,7 +22,7 @@ public class CaptureConversion {
         }
         List<?> instance = holder.getInstance();
 
-        //holder.getInstance().set(0, null);
+        //holder.getInstance().setAndGet(0, null);
         holder.setInstance(new ArrayList<>(Arrays.asList(1.1, 2.2, 3.3)));
 
         Object o = instance.get(0);
