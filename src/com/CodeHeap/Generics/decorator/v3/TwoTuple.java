@@ -1,20 +1,20 @@
 package com.CodeHeap.Generics.decorator.v3;
 
-public class TwoTuple<OBJECT, CLASS> {
-    private OBJECT object;
-    private CLASS type;
-    public TwoTuple(OBJECT object, CLASS type){
-        this.object = object;
-        this.type = type;
+public class TwoTuple<T, T2> {
+    private T first;
+    private T2 second;
+    public TwoTuple(T object, T2 type){
+        this.first = object;
+        this.second = type;
     }
-    public OBJECT getObject(){
-        return object;
+    public T getFirst(){
+        return first;
     }
 
-    public CLASS getType() {
-        return type;
+    public T2 getSecond() {
+        return second;
     }
-    public static <OBJECT, CLASS> TwoTuple<OBJECT, CLASS> makeTuple(OBJECT object, CLASS type){
+    public static <TYPE1, TYPE2> TwoTuple<TYPE1 , TYPE2> makeTuple(TYPE1 object, TYPE2 type){
         return new TwoTuple<>(object, type);
     }
 }
