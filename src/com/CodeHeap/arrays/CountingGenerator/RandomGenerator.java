@@ -25,8 +25,8 @@ public class RandomGenerator {
         {
             chGen = new Character();
         }
-        String(){}
-        String(int length){
+        public String(){}
+        public String(int length){
             this.length = length;
         }
     }
@@ -47,8 +47,8 @@ public class RandomGenerator {
 
     public static class Integer implements Generator<java.lang.Integer>{
         private int modulo=10000;
-        Integer(){}
-        Integer(int modulo){
+        public Integer(){}
+        public Integer(int modulo){
             this.modulo = modulo;
         }
         @Override
