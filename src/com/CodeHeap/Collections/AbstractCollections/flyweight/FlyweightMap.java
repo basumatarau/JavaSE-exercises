@@ -87,11 +87,11 @@ public class FlyweightMap extends AbstractMap<String, String> {
         };
     }
 
-    static Map<String, String> capitals() {
+    public static Map<String, String> capitals() {
         return select(Countries.DATA.length);
     }
 
-    static Map<String, String> capitals(int size) {
+    public static Map<String, String> capitals(int size) {
         return select(size);
     }
 

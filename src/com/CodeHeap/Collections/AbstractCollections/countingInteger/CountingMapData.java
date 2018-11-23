@@ -5,7 +5,7 @@ import java.util.*;
 public class CountingMapData extends AbstractMap<Integer, String> {
     private int size;
     private static String[] chars = "QWERTYUIOPASDFGHJKLZXCVBNM".split("");
-    CountingMapData(int size){
+    public CountingMapData(int size){
         this.size = size;
     }
 
@@ -22,7 +22,7 @@ public class CountingMapData extends AbstractMap<Integer, String> {
 
         @Override
         public String getValue() {
-            return chars[index%chars.length];
+            return chars[index%chars.length]+(index/chars.length);
         }
 
         @Override
@@ -51,6 +51,7 @@ public class CountingMapData extends AbstractMap<Integer, String> {
             return new Iterator<Map.Entry<Integer, String>>() {
 
                 private Entry entry = new Entry(-1);
+
                 @Override
                 public boolean hasNext() {
                     return entry.index<size;
