@@ -9,11 +9,11 @@ public class CountingMapData extends AbstractMap<Integer, String> {
         this.size = size;
     }
 
-    static class Entry implements Map.Entry<Integer, String>{
+    private static class Entry implements Map.Entry<Integer, String>{
         Entry(int index){
             this.index = index;
         }
-        int index;
+        private int index;
 
         @Override
         public Integer getKey() {
@@ -32,12 +32,12 @@ public class CountingMapData extends AbstractMap<Integer, String> {
 
         @Override
         public int hashCode() {
-            return Integer.valueOf(index).hashCode();
+            return this.getKey().hashCode();
         }
 
         @Override
         public boolean equals(Object o) {
-            return Integer.valueOf(index).equals(o);
+            return (o instanceof Entry) && this.getKey().equals(((Entry)o).getKey());
         }
     }
 
@@ -59,7 +59,7 @@ public class CountingMapData extends AbstractMap<Integer, String> {
 
                 @Override
                 public Map.Entry<Integer, String> next() {
-                    entry.index++;
+                    entry.index=entry.index+1;
                     return entry;
                 }
             };
@@ -67,7 +67,7 @@ public class CountingMapData extends AbstractMap<Integer, String> {
 
         @Override
         public int size() {
-            return 0;
+            return size;
         }
     }
 

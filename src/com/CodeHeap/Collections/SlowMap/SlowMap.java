@@ -120,10 +120,10 @@ public class SlowMap<K, V> implements Map<K, V> {
             }
 
             @Override
-            public Object[] toArray(Object[] objects) {
+            public <T> T[] toArray(T[] objects) {
 
                 for (int i = 0; i < objects.length; i++) {
-                    objects[i]=keys.get(i);
+                    objects[i]=(T)keys.get(i);
                 }
                 return objects;
             }
@@ -180,7 +180,6 @@ public class SlowMap<K, V> implements Map<K, V> {
                         addAny = true;
                     }
                 }
-
                 return addAny;
             }
 
