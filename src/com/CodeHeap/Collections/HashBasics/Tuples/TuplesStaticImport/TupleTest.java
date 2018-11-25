@@ -1,5 +1,8 @@
 package com.CodeHeap.Collections.HashBasics.Tuples.TuplesStaticImport;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.CodeHeap.Collections.HashBasics.Tuples.TuplesStaticImport.Tuple.tuple;
 
 public class TupleTest {
@@ -20,5 +23,14 @@ public class TupleTest {
         @SuppressWarnings("unchcked")
         TwoTuple<String, String> ttss = f2();
         System.out.println(ttss);
+
+        List<TwoTuple<Integer, Integer>> abTuplesIntInt = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            abTuplesIntInt.add(tuple(i,i));
+        }
+        abTuplesIntInt.add(tuple(3,3));
+        System.out.println(abTuplesIntInt);
+        abTuplesIntInt.sort(TwoTuple::compareTo);
+        System.out.println(abTuplesIntInt);
     }
 }
