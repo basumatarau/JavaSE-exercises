@@ -81,7 +81,7 @@ public class EntrySet<K, V> implements Set<Map.Entry<K, V>> {
                             break;
                         }
                     }
-                    //todo exception should be thrown here
+                    //todo exception should be thrown here (wrapped in RuntimeException)
                     // (second consecutive next() call without hasNext() called before)
                 } else if (ptr.next() != null) {
                     ptr = ptr.next();
