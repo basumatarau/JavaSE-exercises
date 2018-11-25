@@ -59,9 +59,9 @@ public class KeySet<K, V> implements Set<K> {
             public K next() {
                 int pos = 0;
                 counter++;
-                for (int i = 0; i < buckets.length; i++) {
-                    if (buckets[i] != null) {
-                        MapEntry<K, V> entry = buckets[i];
+                for (MapEntry<K, V> bucket : buckets) {
+                    if (bucket != null) {
+                        MapEntry<K, V> entry = bucket;
                         do {
                             if (counter == pos++) {
                                 return entry.getKey();
