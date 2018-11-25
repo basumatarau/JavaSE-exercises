@@ -2,17 +2,15 @@ package com.CodeHeap.Collections.SimpleHashMapImpl2;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
-public class EntrySet<K, V> implements Set<MapEntry<K, V>> {
+public class EntrySet<K, V> implements Set<Map.Entry<K, V>> {
 
     private MapEntry<K, V>[] buckets;
 
     EntrySet(MapEntry<K, V>[] buckets) {
         this.buckets = buckets;
-    }
-    public static <K,V> Set<MapEntry<K, V>> getEntrySet(MapEntry<K, V>[] buckets){
-        return new EntrySet<>(buckets);
     }
 
     @Override
@@ -48,8 +46,8 @@ public class EntrySet<K, V> implements Set<MapEntry<K, V>> {
     }
 
     @Override
-    public Iterator<MapEntry<K, V>> iterator() {
-        return new Iterator<MapEntry<K, V>>() {
+    public Iterator<Map.Entry<K, V>> iterator() {
+        return new Iterator<Map.Entry<K, V>>() {
             int index;
             MapEntry<K, V> ptr;
 
@@ -141,7 +139,7 @@ public class EntrySet<K, V> implements Set<MapEntry<K, V>> {
     }
 
     @Override
-    public boolean add(MapEntry<K, V> kvMapEntry) {
+    public boolean add(Map.Entry<K, V> kvMapEntry) {
         int index = Math.abs(kvMapEntry.hashCode()) % buckets.length;
         //ugly but should work
         if (buckets[index] != null) {
@@ -206,9 +204,9 @@ public class EntrySet<K, V> implements Set<MapEntry<K, V>> {
     }
 
     @Override
-    public boolean addAll(Collection<? extends MapEntry<K, V>> collection) {
+    public boolean addAll(Collection<? extends Map.Entry<K, V>> collection) {
         boolean addedAny = false;
-        for (MapEntry<K, V> entry : collection) {
+        for (Map.Entry<K, V> entry : collection) {
             if (add(entry)) {
                 addedAny = true;
             }

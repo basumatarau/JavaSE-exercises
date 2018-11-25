@@ -274,9 +274,7 @@ public class KeySet<K, V> implements Set<K> {
                 MapEntry<K, V> entry = bucket;
                 while (entry != null) {
                     result.append(delimiter)
-                            .append(entry.getKey())
-                            .append("=")
-                            .append(entry.getValue());
+                            .append(entry.getKey());
                     entry = entry.next();
                     delimiter = ", ";
                 }

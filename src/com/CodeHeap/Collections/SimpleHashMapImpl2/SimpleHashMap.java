@@ -170,7 +170,7 @@ public class SimpleHashMap<K, V> implements Map<K, V> {
 
     @Override
     public Set<Entry<K, V>> entrySet() {
-        return null;
+        return new EntrySet<>(buckets);
     }
 
     @Override
