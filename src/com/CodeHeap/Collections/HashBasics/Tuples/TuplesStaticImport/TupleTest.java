@@ -2,6 +2,7 @@ package com.CodeHeap.Collections.HashBasics.Tuples.TuplesStaticImport;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static com.CodeHeap.Collections.HashBasics.Tuples.TuplesStaticImport.Tuple.tuple;
 
@@ -32,5 +33,6 @@ public class TupleTest {
         System.out.println(abTuplesIntInt);
         abTuplesIntInt.sort(TwoTuple::compareTo);
         System.out.println(abTuplesIntInt);
+
     }
 }

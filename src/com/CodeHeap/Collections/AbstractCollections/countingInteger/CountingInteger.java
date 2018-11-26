@@ -5,7 +5,7 @@ import java.util.AbstractList;
 public class CountingInteger extends AbstractList<Integer> {
     private int size;
 
-    CountingInteger(int size) {
+    public CountingInteger(int size) {
         this.size = size < 0 ? 0 : size;
     }
 
