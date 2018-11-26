@@ -6,8 +6,10 @@ import com.CodeHeap.Collections.perfomanceTests.testEnvironment.TestParam;
 import com.CodeHeap.Collections.perfomanceTests.testEnvironment.Tester;
 import com.CodeHeap.arrays.CountingGenerator.CountingGenerator;
 import com.CodeHeap.arrays.CountingGenerator.Generated;
+import com.CodeHeap.arrays.CountingGenerator.RandomGenerator;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ListPerformance {
     static Random rand = new Random();
@@ -86,6 +88,19 @@ public class ListPerformance {
                 return size * loops;
             }
         });
+        tests.add(new Test<List<Integer>>("sort"){
+            @Override
+            public int test(List<Integer> container, TestParam param) {
+                int size = param.size;
+                int loops = param.loops;
+                for (int i = 0; i < loops; i++) {
+                    container.clear();
+                    container.addAll(Arrays.asList(Generated.fill(Integer.class, new RandomGenerator.Integer(), size)));
+                    Collections.sort(container);
+                }
+                return loops;
+            }
+        });
 
         qtests.add(new Test<LinkedList<Integer>>("addFirst") {
             @Override
@@ -147,24 +162,6 @@ public class ListPerformance {
                 return size * loops;
             }
         });
-    }
-
-    static class ListTester extends Tester<List<Integer>> {
-
-        public ListTester(List<Integer> container, List<Test<List<Integer>>> tests) {
-            super(container, tests);
-        }
-
-        @Override
-        protected List<Integer> initialize(int size) {
-            container.clear();
-            container.addAll(new CountingInteger(size));
-            return container;
-        }
-
-        public static void run(List<Integer> list, List<Test<List<Integer>>> tests) {
-            new ListTester(list, tests).timedTest();
-        }
     }
 
     public static void main(String[] args) {
