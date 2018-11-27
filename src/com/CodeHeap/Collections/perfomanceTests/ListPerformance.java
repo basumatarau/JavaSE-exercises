@@ -9,7 +9,6 @@ import com.CodeHeap.arrays.CountingGenerator.Generated;
 import com.CodeHeap.arrays.CountingGenerator.RandomGenerator;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ListPerformance {
     static Random rand = new Random();
@@ -180,7 +179,7 @@ public class ListPerformance {
         arrayTest.timedTest();
         ListTester.run(new ArrayList<>(), tests);
         ListTester.run(new LinkedList<>(), tests);
-        Tester.fieldWidh = 12;
+        Tester.fieldWidth = 12;
         Tester<LinkedList<Integer>> linkedListTester = new Tester<>(new LinkedList<Integer>(), qtests);
         linkedListTester.setHeadline("Queue tests");
         linkedListTester.timedTest();

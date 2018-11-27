@@ -3,7 +3,7 @@ package com.CodeHeap.Collections.perfomanceTests.testEnvironment;
 import java.util.List;
 
 public class Tester<C> {
-    public static int fieldWidh = 8;
+    public static int fieldWidth = 8;
     public static TestParam[] defaultParams = TestParam.array(10, 5000, 100, 5000, 1000, 5000, 10000, 500);
     private String headline = "";
     public List<Test<C>> tests;
@@ -19,11 +19,11 @@ public class Tester<C> {
     }
 
     private static String stringField() {
-        return "%" + fieldWidh + "s";
+        return "%" + fieldWidth + "s";
     }
 
     private static String numberField() {
-        return "%" + fieldWidh + "d";
+        return "%" + fieldWidth + "d";
     }
 
     private static int sizeWidth = 5;
@@ -47,7 +47,7 @@ public class Tester<C> {
     }
 
     private void displayHeader() {
-        int width = fieldWidh * tests.size() + sizeWidth;
+        int width = fieldWidth * tests.size() + sizeWidth;
         int dashLength = width - headline.length() - 1;
         StringBuilder header = new StringBuilder(width);
         for (int i = 0; i < dashLength / 2; i++) {
