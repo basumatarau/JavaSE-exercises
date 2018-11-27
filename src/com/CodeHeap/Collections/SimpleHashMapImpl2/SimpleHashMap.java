@@ -3,7 +3,7 @@ package com.CodeHeap.Collections.SimpleHashMapImpl2;
 import java.util.*;
 
 public class SimpleHashMap<K, V> implements Map<K, V> {
-    private final int SIZE = 1024;
+    private int size = 1024;
 
     @SuppressWarnings("unchecked")
     private MapEntry<K, V>[] buckets = (MapEntry<K, V>[]) new MapEntry[1024];
@@ -36,7 +36,7 @@ public class SimpleHashMap<K, V> implements Map<K, V> {
     @Override
     public boolean containsKey(Object o) {
 
-        int index = Math.abs(o.hashCode()) % SIZE;
+        int index = Math.abs(o.hashCode()) % size;
 
         if (buckets[index] != null) {
             MapEntry<K, V> entry = buckets[index];
@@ -70,7 +70,7 @@ public class SimpleHashMap<K, V> implements Map<K, V> {
     @Override
     public V put(K k, V v) {
 
-        int index = Math.abs(k.hashCode()) % SIZE;
+        int index = Math.abs(k.hashCode()) % size;
 
         if (buckets[index] != null) {
             MapEntry<K, V> entry = buckets[index];
@@ -95,7 +95,7 @@ public class SimpleHashMap<K, V> implements Map<K, V> {
 
     @Override
     public V get(Object o) {
-        int index = Math.abs(o.hashCode()) % SIZE;
+        int index = Math.abs(o.hashCode()) % size;
         if (buckets[index] == null) {
             return null;
         } else {
@@ -112,7 +112,7 @@ public class SimpleHashMap<K, V> implements Map<K, V> {
 
     @Override
     public V remove(Object o) {
-        int index = Math.abs(o.hashCode()) % SIZE;
+        int index = Math.abs(o.hashCode()) % size;
         if (buckets[index] == null) {
             return null;
         } else {
