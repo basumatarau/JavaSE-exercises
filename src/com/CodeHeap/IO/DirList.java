@@ -47,7 +47,7 @@ public class DirList {
         Arrays.sort(list, String.CASE_INSENSITIVE_ORDER);
 
         Map<String, Long> fNameSize = new HashMap<>();
-        Long totalSize = 0L;
+        long totalSize = 0L;
         for (String s : list) {
             File f = new File(s);
             fNameSize.put(f.getName(), f.length());

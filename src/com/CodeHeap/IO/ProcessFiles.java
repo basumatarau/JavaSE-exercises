@@ -16,36 +16,43 @@ public class ProcessFiles {
         this.instance = strategy;
     }
 
-    public void start(String... args) {
+    public long start(String... args) {
+        long totalSize = 0;
         try {
             if (args.length == 0) {
-                processDirectoryTree(new File("."));
+                totalSize += processDirectoryTree(new File("."));
             } else {
                 for (String arg : args) {
                     File fileArg = new File(arg);
                     if (fileArg.isDirectory()) {
-                        processDirectoryTree(fileArg);
+                        totalSize += processDirectoryTree(fileArg);
                     } else {
                         if (!arg.endsWith("." + fileExtension)) {
                             arg += "." + fileExtension;
                         }
-                        instance.process(new File(arg).getCanonicalFile());
+                        File file = new File(arg);
+                        instance.process(file.getCanonicalFile());
+                        totalSize += file.length();
                     }
                 }
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        return totalSize;
     }
 
-    public void processDirectoryTree(File root) throws IOException {
+    public long processDirectoryTree(File root) throws IOException {
+        long totalSize = 0;
         for (File file : Directory.walk(root.getAbsolutePath(), ".*\\." + fileExtension)) {
             instance.process(file.getCanonicalFile());
+            totalSize += file.length();
         }
+        return totalSize;
     }
 
     public static void main(String[] args) {
         ProcessFiles processor = new ProcessFiles((file) -> System.out.println(file), "java");
-        processor.start(args);
+        System.out.println("Total size: " + processor.start(args) + " kB");
     }
 }
