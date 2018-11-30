@@ -72,7 +72,7 @@ public class ProcessFiles {
 
     public static void main(String[] args) throws IOException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        long theDayBefore = new Date().getTime() - (long) (Math.pow(10, 3) * 60 * 60 * 24);
+        long theDayBefore = new Date().getTime() - (long) (1000 * 3600 * 24);
         System.out.println(sdf.format(theDayBefore));
         ProcessFiles processor = new ProcessFiles(new ProcessorLogic(theDayBefore), "java");
         System.out.println("Total size: " + processor.start(args) + " kB");

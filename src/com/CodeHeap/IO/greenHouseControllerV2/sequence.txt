@@ -1,0 +1,13 @@
+greenhouse control sequence:
+repeat at every restart: LightsOn (1800)
+repeat at every restart: LightsOff (900)
+repeat at every restart: WaterOn (1100)
+repeat at every restart: WaterOff (1200)
+repeat at every restart: WaterOn (1700)
+repeat at every restart: WaterOff (1800)
+repeat at every restart: ThermostatDay (700)
+repeat at every restart: ThermostatNight (1900)
+restart cycle: Restart (2400):
+self repeated event: Bell (1200)
+self repeated event: Bell (1300)
+termination: Terminate (12000)
