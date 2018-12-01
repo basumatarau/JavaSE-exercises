@@ -1,9 +1,9 @@
-package com.CodeHeap.IO;
+package com.CodeHeap.IO.util;
+
+import com.CodeHeap.IO.filesAndDirectories.Directory;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.Timestamp;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -55,26 +55,18 @@ public class ProcessFiles {
         return totalSize;
     }
 
-    private static class ProcessorLogic implements Strategy {
-        @Override
-        public void process(File file) throws IOException {
-            if (lastModifiedTime < file.lastModified()) {
-                System.out.println(file.getCanonicalPath());
-            }
-        }
-
-        long lastModifiedTime;
-
-        public ProcessorLogic(long lastModifiedTime) {
-            this.lastModifiedTime = lastModifiedTime;
-        }
-    }
 
     public static void main(String[] args) throws IOException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        long theDayBefore = new Date().getTime() - (long) (1000 * 3600 * 24);
-        System.out.println(sdf.format(theDayBefore));
-        ProcessFiles processor = new ProcessFiles(new ProcessorLogic(theDayBefore), "java");
+
+        ProcessFiles processor = new ProcessFiles((f)->{
+            int counter = 10;
+            System.out.print("first 10 bytes of "+f.getName()+": ");
+            for (byte b : BinaryFile.read(f)) {
+                System.out.print(String.format("%02x ", b));
+                if(counter--<0) break;
+            }
+            System.out.println();
+        }, "class");
         System.out.println("Total size: " + processor.start(args) + " kB");
     }
 }

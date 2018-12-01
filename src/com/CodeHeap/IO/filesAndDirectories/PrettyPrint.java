@@ -1,4 +1,4 @@
-package com.CodeHeap.IO;
+package com.CodeHeap.IO.filesAndDirectories;
 
 import java.util.Arrays;
 import java.util.Collection;

@@ -150,18 +150,16 @@ public class GreenHouseControls extends Controller{
                         }
 
                         if(line.matches(".*repeat at every restart.*")){
-                            GreenHouseControls controls = this.getClass().newInstance();
                             Event event = eventFactory.getDeclaredConstructor(this.getClass(), Long.TYPE)
-                                    .newInstance(controls, Long.valueOf(group));
+                                    .newInstance(this, Long.valueOf(group));
                             repeatedEvents.add(event);
                         }else if(line.matches(".*restart cycle.*")){
                             Event event = eventFactory.getDeclaredConstructor(this.getClass(), Long.TYPE, Event[].class)
-                                    .newInstance(this, Long.valueOf(group), repeatedEvents.toArray(new Event[5]));
+                                    .newInstance(this, Long.valueOf(group), repeatedEvents.toArray(new Event[1]));
                             addEvent(event);
                         }else{
-                            GreenHouseControls controls = this.getClass().newInstance();
                             Event event = eventFactory.getDeclaredConstructor(this.getClass(), Long.TYPE)
-                                    .newInstance(controls, Long.valueOf(group));
+                                    .newInstance(this, Long.valueOf(group));
                             addEvent(event);
                         }
                     }catch (NoSuchMethodException | InstantiationException
