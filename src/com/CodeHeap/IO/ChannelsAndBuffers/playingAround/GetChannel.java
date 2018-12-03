@@ -1,4 +1,4 @@
-package com.CodeHeap.IO.ChannelsAndBuffers;
+package com.CodeHeap.IO.ChannelsAndBuffers.playingAround;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,7 +12,7 @@ public class GetChannel {
 
         String path = System.getProperty("user.dir")+ File.separator + "src" +File.separator
                 + GetChannel.class.getName().replaceAll("\\.", File.separator)
-                .replace(GetChannel.class.getSimpleName(), "out.txt");
+                .replace(GetChannel.class.getSimpleName(), "in.txt");
 
         FileChannel channel = new FileOutputStream(path).getChannel();
 

@@ -1,4 +1,4 @@
-package com.CodeHeap.IO.ChannelsAndBuffers;
+package com.CodeHeap.IO.ChannelsAndBuffers.playingAround;
 
 import java.nio.charset.Charset;
 import java.util.Map;
