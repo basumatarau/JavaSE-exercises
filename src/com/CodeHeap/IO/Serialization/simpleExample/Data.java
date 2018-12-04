@@ -1,6 +1,8 @@
-package com.CodeHeap.IO.Serialization;
+package com.CodeHeap.IO.Serialization.simpleExample;
 
-public class Data {
+import java.io.Serializable;
+
+public class Data implements Serializable {
     private int n;
     public Data(int n){
         this.n = n;
