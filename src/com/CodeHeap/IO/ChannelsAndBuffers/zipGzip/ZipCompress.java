@@ -1,10 +1,7 @@
 package com.CodeHeap.IO.ChannelsAndBuffers.zipGzip;
 
 import java.io.*;
-import java.util.zip.Adler32;
-import java.util.zip.CheckedOutputStream;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
+import java.util.zip.*;
 
 public class ZipCompress {
     private static String path = System.getProperty("user.dir") + File.separator + "src" + File.separator
@@ -21,7 +18,7 @@ public class ZipCompress {
         BufferedReader in = new BufferedReader(
                 new FileReader(path + "in.txt")
         );
-        zipOutputStream.putNextEntry(new ZipEntry( "in.txt"));
+        zipOutputStream.putNextEntry(new ZipEntry("in.txt"));
         int ch;
         while ((ch = in.read()) != -1) {
             out.write(ch);
@@ -40,7 +37,23 @@ public class ZipCompress {
         out.flush();
 
         out.close();
+        System.out.println("Checksum: " + checkedOut.getChecksum().getValue());
 
 
+        FileInputStream fin = new FileInputStream(path + "out.zip");
+        CheckedInputStream checkedIn = new CheckedInputStream(fin, new Adler32());
+        ZipInputStream zipIn = new ZipInputStream(checkedIn);
+        BufferedInputStream buffIn = new BufferedInputStream(zipIn);
+
+        ZipEntry nextEntry;
+        while ((nextEntry = zipIn.getNextEntry()) != null) {
+            System.out.println("Reading file: " + nextEntry);
+            while ((ch = buffIn.read()) != -1) {
+                System.out.write(ch);
+            }
+            System.out.println();
+        }
+
+        buffIn.close();
     }
 }
