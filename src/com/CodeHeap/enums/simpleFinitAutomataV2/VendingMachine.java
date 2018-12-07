@@ -40,13 +40,13 @@ public class VendingMachine {
                 State.RESTING, new BasicState() {
                     @Override
                     public void next(Input input) {
-                        switch (Category.categorise(input)) {
-                            case MONEY:
-                                amount += input.amount();
-                                state = State.ADDING_MONEY;
-                                break;
-                            case SHUT_DOWN:
-                                state = State.TERMINAL;
+                        if(input instanceof Coin) {
+                            amount += input.amount();
+                            state = State.ADDING_MONEY;
+                        }
+                        if(input instanceof ControlHandles){
+                            if(((ControlHandles) input).getName().equals("Stop"))
+                            state = State.TERMINAL;
                         }
                     }
                 }
@@ -55,23 +55,23 @@ public class VendingMachine {
                 State.ADDING_MONEY, new BasicState() {
                     @Override
                     public void next(Input input) {
-                        switch (Category.categorise(input)) {
-                            case MONEY:
-                                amount += input.amount();
-                                break;
-                            case ITEM_SELECTION:
-                                selection = input;
-                                if (selection.value > amount) {
-                                    System.out.println("Insufficient money for " + selection);
-                                } else {
-                                    state = State.DISPENSING;
-                                }
-                                break;
-                            case QUIT_TRANSACTION:
+                        if(input instanceof Coin) {
+                            amount += input.amount();
+                        }
+                        if(input instanceof Good) {
+                            selection = input;
+                            if (selection.value > amount) {
+                                System.out.println("Insufficient money for " + selection);
+                            } else {
+                                state = State.DISPENSING;
+                            }
+                        }
+                        if(input instanceof ControlHandles){
+                            if(((ControlHandles) input).getName().equals("Abort_Transaction")){
                                 state = State.GIVING_CHANGE;
-                                break;
-                            case SHUT_DOWN:
+                            }else{
                                 state = State.TERMINAL;
+                            }
                         }
                     }
                 }

@@ -1,23 +1,28 @@
 package com.CodeHeap.enums.simpleFinitAutomataV2;
 
+import java.util.ArrayList;
 import java.util.Random;
 
-public enum Input {
+public abstract class Input {
 
-    NICKEL(5), DIME(10), QUARTER(25), DOLLAR(100),
-    TOOTHPASTE(100), CHIPS(75), SODA(100), SOAP(50),
-    ABORT_TRANSACTION {
-        @Override
-        int amount() {
-            throw new RuntimeException("ABORT_AMOUNT.amount();");
-        }
-    },
-    STOP {
-        @Override
-        int amount() {
-            throw new RuntimeException("STOP.amount();");
-        }
-    };
+    private static ArrayList<Input> inputs = new ArrayList<>();
+
+    //thread unsafe implementation (class loader for Input and its subclasses may get into a deadlock...)
+    static {
+        inputs.add(new Coin("Nickel", 5));
+        inputs.add(new Coin("Dime", 10));
+        inputs.add(new Coin("Quarter", 25));
+        inputs.add(new Coin("Dollar", 100));
+
+        inputs.add(new Good("Toothpaste", 100));
+        inputs.add(new Good("Chips", 75));
+        inputs.add(new Good("Soda", 100));
+        inputs.add(new Good("Soap", 50));
+
+        inputs.add(new ControlHandles("Abort_Transaction"));
+        inputs.add(new ControlHandles("Stop"));
+    }
+
 
     int value;
 
@@ -34,8 +39,9 @@ public enum Input {
 
     static Random random = new Random(47);
 
-    public static Input selectRandomInput() {
+    static Input selectRandomInput() {
         //not including STOP instance...
-        return values()[random.nextInt(values().length - 1)];
+        // so the TERMINAL state on random Item selection won't be achieved
+        return inputs.subList(0, inputs.size()-1).get(random.nextInt(inputs.size()-1));
     }
 }
