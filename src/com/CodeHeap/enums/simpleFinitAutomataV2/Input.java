@@ -37,7 +37,7 @@ public abstract class Input {
         this.value = value;
     }
 
-    static Random random = new Random(47);
+    private static Random random = new Random(47);
 
     static Input selectRandomInput() {
         //not including STOP instance...
