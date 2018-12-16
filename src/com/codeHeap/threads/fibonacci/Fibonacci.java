@@ -1,4 +1,4 @@
-package com.codeHeap.threads.Fibonacci;
+package com.codeHeap.threads.fibonacci;
 
 
 public class Fibonacci {

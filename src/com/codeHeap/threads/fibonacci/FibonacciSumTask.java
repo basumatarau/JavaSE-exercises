@@ -1,4 +1,4 @@
-package com.codeHeap.threads.Fibonacci;
+package com.codeHeap.threads.fibonacci;
 
 import java.util.ArrayList;
 import java.util.List;
