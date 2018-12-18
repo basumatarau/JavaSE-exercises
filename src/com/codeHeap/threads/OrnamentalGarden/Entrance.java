@@ -32,7 +32,7 @@ public class Entrance implements Runnable {
                 TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e) {
                 System.out.println(Thread.currentThread() + " interrupted");
-                break;
+                cancel();
             }
         }
         System.out.println("stopping " + this);
