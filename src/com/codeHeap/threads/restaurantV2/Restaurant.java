@@ -1,4 +1,4 @@
-package com.codeHeap.threads.RestaurantV2;
+package com.codeHeap.threads.restaurantV2;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

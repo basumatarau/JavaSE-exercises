@@ -1,4 +1,4 @@
-package com.codeHeap.threads.RestaurantV2;
+package com.codeHeap.threads.restaurant;
 
 public class Employee {
     @Override

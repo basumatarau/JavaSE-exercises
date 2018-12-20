@@ -1,7 +1,8 @@
-package com.codeHeap.threads.OrnamentalGarden;
+package com.codeHeap.threads.ornamentalGardenV2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 public class Entrance implements Runnable {
@@ -10,6 +11,7 @@ public class Entrance implements Runnable {
     private int number = 0;
     private final int id;
     private static volatile boolean cancelled = false;
+    private static CountDownLatch latch = OrnamentalGarden.getLatch();
 
     Entrance(int id) {
         this.id = id;
@@ -23,19 +25,22 @@ public class Entrance implements Runnable {
     @Override
     public void run() {
         while (!cancelled) {
-            synchronized (this) {
-                number++;
-            }
+            //no need to sync the subtask (increment) since getValue()
+            // method is called only after all the threads get 'over the latch'
+
+            number++;
+
             System.out.println(this + " Total: " + count.increment());
 
             try {
-                TimeUnit.MILLISECONDS.sleep(100);
+                TimeUnit.MILLISECONDS.sleep(5);
             } catch (InterruptedException e) {
                 System.out.println(Thread.currentThread() + " interrupted");
                 cancel();
             }
         }
-        System.out.println("stopping " + this);
+        latch.countDown();
+        System.out.println("stopping " + this + ", latch count: " + latch.getCount());
     }
 
     synchronized public int getValue(){
@@ -48,11 +53,21 @@ public class Entrance implements Runnable {
     }
 
     public static int getTotalCount(){
+        try {
+            latch.await();
+        }catch (InterruptedException e){
+            System.out.println("interrupted");
+        }
         return count.value();
     }
 
     public static int sumEntrances(){
         int result = 0;
+        try {
+            latch.await();
+        }catch (InterruptedException e){
+            System.out.println("interrupted");
+        }
         for (Entrance entrance : entrances) {
             result+=entrance.getValue();
         }

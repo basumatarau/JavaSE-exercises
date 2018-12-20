@@ -1,22 +1,10 @@
-package com.codeHeap.threads.RestaurantV2;
+package com.codeHeap.threads.restaurant;
 
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class Chef extends Employee implements Runnable {
     private Restaurant restaurant;
     private int mealCounter = 10;
-
-    private Lock chefLock = new ReentrantLock();
-    private Condition chefCondition = chefLock.newCondition();
-    public Condition getChefCondition(){
-        return chefCondition;
-    }
-    public Lock getChefLock(){
-        return chefLock;
-    }
 
     Chef(Restaurant restaurant) {
         this.restaurant = restaurant;
@@ -26,17 +14,12 @@ public class Chef extends Employee implements Runnable {
     public void run() {
         try{
             while(!Thread.interrupted()){
-
-                chefLock.lock();
-                try {
-                    while (restaurant.mealAtCheckOutCounter != null) {
+                synchronized (this){
+                    while(restaurant.mealAtCheckOutCounter!=null){
                         System.out.println(this + " is waiting for the meal to be claimed");
-                        chefCondition.await();
+                        wait();
                     }
-                }finally{
-                    chefLock.unlock();
                 }
-
                 restaurant.mealAtCheckOutCounter = new Meal(mealCounter--);
 
                 if(mealCounter==0){
@@ -44,12 +27,9 @@ public class Chef extends Employee implements Runnable {
                     restaurant.close();
                 }
 
-                restaurant.waiter.getWaiterLock().lock();
-                try{
+                synchronized (restaurant.waiter){
                     System.out.println(this + " calling a waiter to claim the meal");
-                    restaurant.waiter.getWaiterCondition().signal();
-                }finally {
-                    restaurant.waiter.getWaiterLock().unlock();
+                    restaurant.waiter.notify();
                 }
                 System.out.println(this + " is smoking...");
                 TimeUnit.MILLISECONDS.sleep(100);

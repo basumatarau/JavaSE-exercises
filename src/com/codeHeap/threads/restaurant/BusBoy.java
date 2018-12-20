@@ -1,21 +1,9 @@
-package com.codeHeap.threads.RestaurantV2;
+package com.codeHeap.threads.restaurant;
 
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class BusBoy extends Employee implements Runnable {
     private Restaurant restaurant;
-    private Lock busBoyLock = new ReentrantLock();
-    private Condition busBoyCondition = busBoyLock.newCondition();
-
-    public Condition getBusBoyCondition(){
-        return busBoyCondition;
-    }
-    public Lock getBusBoyLock(){
-        return busBoyLock;
-    }
 
     BusBoy(Restaurant restaurant) {
         this.restaurant = restaurant;
@@ -25,24 +13,17 @@ public class BusBoy extends Employee implements Runnable {
     public void run() {
         try{
             while (!Thread.interrupted()){
-                busBoyLock.lock();
-                try{
+                synchronized (this) {
                     if (!restaurant.needCleanUp) {
-                        busBoyCondition.await();
+                        wait();
                     }
-                }finally{
-                    busBoyLock.unlock();
                 }
-
                 System.out.println(this + " is cleaning up...");
                 TimeUnit.MILLISECONDS.sleep(60);
 
-                restaurant.waiter.getWaiterLock().lock();
-                try{
+                synchronized (restaurant.waiter) {
                     restaurant.needCleanUp = false;
                     System.out.println(this + " has finished cleaning up");
-                }finally{
-                    restaurant.waiter.getWaiterLock().unlock();
                 }
             }
         }catch (InterruptedException e){

@@ -1,4 +1,4 @@
-package com.codeHeap.threads.OrnamentalGardenV2;
+package com.codeHeap.threads.ornamentalGardenV2;
 
 import java.util.concurrent.*;
 

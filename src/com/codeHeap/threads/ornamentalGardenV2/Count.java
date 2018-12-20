@@ -1,4 +1,4 @@
-package com.codeHeap.threads.OrnamentalGarden;
+package com.codeHeap.threads.ornamentalGardenV2;
 
 import java.util.Random;
 
@@ -6,6 +6,7 @@ public class Count {
     private int count = 0;
 
     private Random rand = new Random(47);
+
     public synchronized int increment(){
 
         int temp = count;

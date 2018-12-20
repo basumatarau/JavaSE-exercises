@@ -1,4 +1,4 @@
-package com.codeHeap.threads.RestaurantV2;
+package com.codeHeap.threads.restaurantV2;
 
 public class Meal {
     private final int id;

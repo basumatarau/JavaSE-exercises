@@ -1,4 +1,4 @@
-package com.codeHeap.threads.OrnamentalGarden;
+package com.codeHeap.threads.ornamentalGarden;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.codeHeap.threads.Restaurant;
+package com.codeHeap.threads.restaurant;
 
 import java.util.concurrent.TimeUnit;
 
