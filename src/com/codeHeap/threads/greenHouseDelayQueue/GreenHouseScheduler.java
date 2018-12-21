@@ -1,7 +1,8 @@
-package com.codeHeap.threads.scheduledExecutor;
+package com.codeHeap.threads.greenHouseDelayQueue;
 
 import java.util.*;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.DelayQueue;
+import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
 
 public class GreenHouseScheduler {
@@ -17,14 +18,69 @@ public class GreenHouseScheduler {
         this.thermostat = thermostat;
     }
 
-    private ScheduledThreadPoolExecutor scheduler = new ScheduledThreadPoolExecutor(10);
+    private DelayQueue<Task> queue = new DelayQueue<>();
 
-    public void schedule(Runnable event, long delayTime) {
-        scheduler.schedule(event, delayTime, TimeUnit.MILLISECONDS);
+    private class Task implements Delayed{
+        private Runnable task;
+        private int delay;
+        long trigger;
+
+        public long getTrigger(){
+            return trigger;
+        }
+
+        public Runnable getTask(){
+            return task;
+        }
+
+        Task(Runnable event, int delayTime) {
+            task = event;
+            delay = delayTime;
+            trigger = System.nanoTime() + TimeUnit.NANOSECONDS.convert(delayTime, TimeUnit.MILLISECONDS);
+        }
+
+        @Override
+        public long getDelay(TimeUnit timeUnit) {
+            return timeUnit.convert(trigger - System.nanoTime(), TimeUnit.NANOSECONDS);
+        }
+
+        @Override
+        public int compareTo(Delayed delayed) {
+            if (trigger > ((Task) delayed).getTrigger())
+                return 1;
+            if(trigger < ((Task) delayed).getTrigger())
+                return -1;
+            return 0;
+        }
     }
 
-    public void repeat(Runnable event, long delayTime, long cycleLength) {
-        scheduler.scheduleAtFixedRate(event, delayTime, cycleLength, TimeUnit.MILLISECONDS);
+    public void schedule(Runnable event, int delayTime) {
+        Task task = new Task(event, delayTime);
+        queue.add(task);
+        //scheduler.schedule(event, delayTime, TimeUnit.MILLISECONDS);
+    }
+
+    public void repeat(Runnable event, int delayTime, long cycleLength) {
+        Task task = new Task(event, delayTime);
+        queue.add(task);
+
+        Thread thread = new Thread(){
+            @Override
+            public void run() {
+                try {
+                    while (true) {
+                        TimeUnit.MILLISECONDS.sleep(cycleLength);
+                        queue.add(new Task(event, delayTime));
+                    }
+                }catch (InterruptedException e){
+                    System.out.println("interrupted");
+                }
+            }
+        };
+        thread.setDaemon(true);
+        thread.start();
+
+        //scheduler.scheduleAtFixedRate(event, delayTime, cycleLength, TimeUnit.MILLISECONDS);
     }
 
     public class LightOn implements Runnable {
@@ -84,8 +140,11 @@ public class GreenHouseScheduler {
 
         @Override
         public void run() {
+
             System.out.println("system is shutting down");
-            scheduler.shutdownNow();
+            //scheduler.shutdownNow();
+            queue.clear();
+
             new Thread() {
                 @Override
                 public void run() {
@@ -95,6 +154,17 @@ public class GreenHouseScheduler {
                     }
                 }
             }.run();
+
+        }
+    }
+
+    public void run(){
+        try {
+            while (!queue.isEmpty()) {
+                queue.take().getTask().run();
+            }
+        }catch (InterruptedException e){
+            System.out.println("interrupted");
         }
     }
 
@@ -116,6 +186,7 @@ public class GreenHouseScheduler {
     }
 
     private Calendar lastTime = Calendar.getInstance();
+
     {
         lastTime.set(Calendar.MINUTE, 30);
         lastTime.set(Calendar.SECOND, 0);
@@ -124,29 +195,28 @@ public class GreenHouseScheduler {
     private float lastTempMeasurement = 65.0f;
     private int temDirection = -1;
     private float lastHumidityMeasurement = 50.0f;
-    private int humDirection = 1;
+    private int humDierction = 1;
     private Random rand = new Random(47);
     List<DataPoint> data = Collections.synchronizedList(new ArrayList<>());
 
-    class CollectData implements Runnable{
+    class CollectData implements Runnable {
         @Override
         public void run() {
             System.out.println("collecting data...");
-            synchronized (GreenHouseScheduler.this){
+            synchronized (GreenHouseScheduler.this) {
                 lastTime.set(Calendar.MINUTE, lastTime.get(Calendar.MINUTE) + 30);
 
-                if (rand.nextInt(5)==4){
+                if (rand.nextInt(5) == 4) {
                     temDirection = -temDirection;
                 }
                 lastTempMeasurement += temDirection * (1.0f + rand.nextFloat());
 
-                if(rand.nextInt(5)==4){
-                    humDirection = -humDirection;
+                if (rand.nextInt(5) == 4) {
+                    humDierction = -humDierction;
                 }
-                lastHumidityMeasurement += humDirection * (1.0f + rand.nextFloat());
+                lastHumidityMeasurement += humDierction * (1.0f + rand.nextFloat());
 
                 data.add(new DataPoint(((Calendar) lastTime.clone()), lastHumidityMeasurement, lastTempMeasurement));
-
             }
         }
     }
@@ -163,5 +233,6 @@ public class GreenHouseScheduler {
         gh.repeat(gh.new ThermostatDay(), 900, 2400);
         gh.repeat(gh.new ThermostatNight(), 2100, 2400);
         gh.repeat(gh.new CollectData(), 0, 500);
+        gh.run();
     }
 }
