@@ -1,7 +1,7 @@
-package com.codeHeap.threads.CarBuilder;
+package com.codeHeap.threads.carBuilder;
 
 public class WheelRobot extends Robot {
-    public WheelRobot(RobotPool robotPool) {
+    WheelRobot(RobotPool robotPool) {
         super(robotPool);
     }
 

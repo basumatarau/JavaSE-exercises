@@ -1,4 +1,4 @@
-package com.codeHeap.threads.CarBuilder;
+package com.codeHeap.threads.carBuilder;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;

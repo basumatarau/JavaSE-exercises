@@ -1,4 +1,4 @@
-package com.codeHeap.threads.CarBuilder;
+package com.codeHeap.threads.carBuilder;
 
 public class Car {
     private final int id;
@@ -9,20 +9,22 @@ public class Car {
         this.id = id;
     }
 
+    /*
     Car(){
         this(-1);
     }
+    */
 
     synchronized public int getId(){
         return id;
     }
-    synchronized public void addEngine(){
+    synchronized void addEngine(){
         engine = true;
     }
-    synchronized public void addDriveTrain(){
+    synchronized void addDriveTrain(){
         driveTrain = true;
     }
-    synchronized public void addWheels(){
+    synchronized void addWheels(){
         wheels = true;
     }
 

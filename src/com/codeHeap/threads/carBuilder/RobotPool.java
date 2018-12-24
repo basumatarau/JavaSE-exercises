@@ -1,17 +1,17 @@
-package com.codeHeap.threads.CarBuilder;
+package com.codeHeap.threads.carBuilder;
 
 import java.util.HashSet;
 
-public class RobotPool {
+class RobotPool {
     private HashSet<Robot> pool = new HashSet<>();
 
-    synchronized public void add(Robot r){
+    synchronized void release(Robot r){
         pool.add(r);
         notifyAll();
     }
 
-    synchronized public void hire(Class<? extends Robot> robotType,
-            Assembler assembler) throws InterruptedException{
+    synchronized void get(Class<? extends Robot> robotType,
+                          Assembler assembler) throws InterruptedException{
 
         for (Robot robot : pool) {
             if(robot.getClass().equals(robotType)){
@@ -22,6 +22,6 @@ public class RobotPool {
             }
         }
         wait();
-        hire(robotType, assembler);
+        get(robotType, assembler);
     }
 }

@@ -1,21 +1,21 @@
-package com.codeHeap.threads.CarBuilder;
+package com.codeHeap.threads.carBuilder;
 
 import java.util.concurrent.BrokenBarrierException;
 
 public abstract class Robot implements Runnable {
-    protected Assembler assembler;
+    Assembler assembler;
     private RobotPool robotPool;
 
     Robot(RobotPool robotPool){
         this.robotPool = robotPool;
     }
 
-    public void assignAssembler(Assembler assembler){
+    void assignAssembler(Assembler assembler){
         this.assembler = assembler;
     }
 
     private boolean isEngaged = false;
-    synchronized public void setEngaged(){
+    synchronized void setEngaged(){
         isEngaged = true;
         notifyAll();
     }
@@ -42,7 +42,7 @@ public abstract class Robot implements Runnable {
     private synchronized void powerDown() throws InterruptedException{
         isEngaged = false;
         assembler = null;
-        robotPool.add(this);
+        robotPool.release(this);
 
         while(!isEngaged){
             System.out.println("is waiting");

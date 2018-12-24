@@ -1,4 +1,4 @@
-package com.codeHeap.threads.CarBuilder;
+package com.codeHeap.threads.carBuilder;
 
 import java.util.concurrent.TimeUnit;
 
@@ -6,7 +6,7 @@ public class ChassisBuilder implements Runnable {
 
     private CarQueue carQueue;
     private int counter = 0;
-    public ChassisBuilder(CarQueue carQueue){
+    ChassisBuilder(CarQueue carQueue){
         this.carQueue = carQueue;
     }
 

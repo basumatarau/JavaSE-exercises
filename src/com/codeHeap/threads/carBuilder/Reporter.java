@@ -1,4 +1,4 @@
-package com.codeHeap.threads.CarBuilder;
+package com.codeHeap.threads.carBuilder;
 
 public class Reporter implements Runnable {
 
