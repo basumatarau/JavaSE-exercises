@@ -1,6 +1,6 @@
 package com.codeHeap.threads.concurrentCollections;
 
-public class TestRunner {
+public class ListTestRunner {
     public static void main(String[] args) {
 
         Tester.initMain(args);
