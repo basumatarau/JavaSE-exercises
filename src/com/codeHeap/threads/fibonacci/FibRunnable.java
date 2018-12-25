@@ -25,7 +25,7 @@ public class FibRunnable implements Runnable {
         ExecutorService executorService = Executors.newCachedThreadPool();
         List<Future> futures = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            //futures.add(executorService.submit(new FibRunnable(i + 5)));
+            //futures.release(executorService.submit(new FibRunnable(i + 5)));
             Callable<Object> callable = Executors.callable(new FibRunnable(i + 5));
             futures.add(executorService.submit(callable));
         }

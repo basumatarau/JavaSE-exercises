@@ -44,8 +44,8 @@ public class Teller implements Runnable, Comparable<Teller> {
 
     @Override
     synchronized public int compareTo(Teller teller) {
-        return servedCustomers > teller.servedCustomers ? 1 :
-                (servedCustomers < teller.servedCustomers ? -1 : 0);
+        return servedCustomers > teller.servedCustomers ? -1 :
+                (servedCustomers < teller.servedCustomers ? 1 : 0);
     }
 
     @Override

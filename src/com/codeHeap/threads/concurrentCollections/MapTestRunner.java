@@ -3,7 +3,7 @@ package com.codeHeap.threads.concurrentCollections;
 public class MapTestRunner {
     public static void main(String[] args) {
 
-        Tester.initMain(args);
+        //Tester.initMain(args);
 
         new SynchronizedHashMapTest(10, 0);
         new SynchronizedHashMapTest(9, 1);
