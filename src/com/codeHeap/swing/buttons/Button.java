@@ -1,4 +1,4 @@
-package com.codeHeap.swing;
+package com.codeHeap.swing.buttons;
 
 import com.codeHeap.swing.util.SwingConsole;
 
