@@ -1,10 +1,6 @@
-package com.codeHeap.swing.drowing;
-
-import com.codeHeap.swing.util.SwingConsole;
+package com.codeHeap.swing.drawing.sinWaveV2;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 
 public class SineDraw extends JPanel {
@@ -13,13 +9,19 @@ public class SineDraw extends JPanel {
     private int points;
     private double[] sines;
     private int[] pts;
+    private int shift = 0;
+
+    public void increaseShift(){
+        shift+=10;
+        repaint();
+    }
 
     SineDraw(int cycles) {
         setCycles(cycles);
         setBackground(Color.BLUE);
     }
 
-    private void setCycles(int newCycles) {
+    public void setCycles(int newCycles) {
         cycles = newCycles;
         points = SCALE_FACTOR * 2 * cycles;
         sines = new double[points];
@@ -39,7 +41,7 @@ public class SineDraw extends JPanel {
         pts = new int[points];
 
         for (int i = 0; i < points; i++) {
-            pts[i] = (int) (sines[i] * maxHeight / 2 * 0.95 + maxHeight / 2);
+            pts[i] = (int) (sines[(shift + i) % points] * maxHeight / 2 * 0.95 + maxHeight / 2);
         }
 
         graphics.setColor(Color.WHITE);
@@ -55,22 +57,4 @@ public class SineDraw extends JPanel {
         }
     }
 
-    public static class SinWave extends JFrame{
-        private SineDraw sineDraw = new SineDraw(3);
-        private JSlider slider = new JSlider(1, 30, 5);
-        SinWave(){
-            slider.addChangeListener(new ChangeListener() {
-                @Override
-                public void stateChanged(ChangeEvent changeEvent) {
-                    sineDraw.setCycles(((JSlider) changeEvent.getSource()).getValue());
-                }
-            });
-            add(sineDraw);
-            add(BorderLayout.SOUTH, slider);
-        }
-    }
-
-    public static void main(String[] args) {
-        SwingConsole.run(new SinWave(), 800, 400 );
-    }
 }
