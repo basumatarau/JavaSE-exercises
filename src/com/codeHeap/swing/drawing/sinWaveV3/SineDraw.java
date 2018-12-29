@@ -1,4 +1,4 @@
-package com.codeHeap.swing.drawing.sinWaveV2;
+package com.codeHeap.swing.drawing.sinWaveV3;
 
 import javax.swing.*;
 import java.awt.*;
