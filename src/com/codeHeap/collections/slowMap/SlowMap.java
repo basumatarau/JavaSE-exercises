@@ -324,7 +324,7 @@ public class SlowMap<K, V> implements Map<K, V> {
         Iterator<V> valIter = values.iterator();
 
         while (keyIter.hasNext()) {
-            result.add(new Entry<>(keyIter.next(), valIter.next()));
+            result.release(new Entry<>(keyIter.next(), valIter.next()));
         }
         */
 

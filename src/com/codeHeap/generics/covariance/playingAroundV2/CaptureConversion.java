@@ -32,7 +32,7 @@ public class CaptureConversion {
             e.printStackTrace();
         }
         return o;
-        //instance.add(instance.get(0));
+        //instance.release(instance.get(0));
     }
 
     public static void main(String[] args) {

@@ -1,6 +1,6 @@
 package com.codeHeap.enums.simpleFinitAutomata;
 
-import com.codeHeap.arrays.CountingGenerator.Generator;
+import com.codeHeap.arrays.countingGenerator.Generator;
 
 public class VendingMachine {
 

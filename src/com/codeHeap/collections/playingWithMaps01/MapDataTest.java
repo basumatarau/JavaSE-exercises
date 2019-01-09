@@ -2,9 +2,9 @@ package com.codeHeap.collections.playingWithMaps01;
 
 import com.codeHeap.collections.mapData.MapData;
 import com.codeHeap.collections.mapData.Pair;
-import com.codeHeap.arrays.CountingGenerator.CountingGenerator;
-import com.codeHeap.arrays.CountingGenerator.Generator;
-import com.codeHeap.arrays.CountingGenerator.RandomGenerator;
+import com.codeHeap.arrays.countingGenerator.CountingGenerator;
+import com.codeHeap.arrays.countingGenerator.Generator;
+import com.codeHeap.arrays.countingGenerator.RandomGenerator;
 
 import java.util.Map;
 

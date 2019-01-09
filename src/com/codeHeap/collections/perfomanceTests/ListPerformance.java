@@ -4,9 +4,9 @@ import com.codeHeap.collections.abstractCollections.countingInteger.CountingInte
 import com.codeHeap.collections.perfomanceTests.testEnvironment.Test;
 import com.codeHeap.collections.perfomanceTests.testEnvironment.TestParam;
 import com.codeHeap.collections.perfomanceTests.testEnvironment.Tester;
-import com.codeHeap.arrays.CountingGenerator.CountingGenerator;
-import com.codeHeap.arrays.CountingGenerator.Generated;
-import com.codeHeap.arrays.CountingGenerator.RandomGenerator;
+import com.codeHeap.arrays.countingGenerator.CountingGenerator;
+import com.codeHeap.arrays.countingGenerator.Generated;
+import com.codeHeap.arrays.countingGenerator.RandomGenerator;
 
 import java.util.*;
 
@@ -17,7 +17,7 @@ public class ListPerformance {
     static List<Test<LinkedList<Integer>>> qtests = new ArrayList<>();
 
     static {
-        tests.add(new Test<List<Integer>>("add") {
+        tests.add(new Test<List<Integer>>("release") {
             @Override
             public int test(List<Integer> container, TestParam param) {
                 int loops = param.loops;

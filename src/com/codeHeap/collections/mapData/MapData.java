@@ -1,6 +1,6 @@
 package com.codeHeap.collections.mapData;
 
-import com.codeHeap.arrays.CountingGenerator.Generator;
+import com.codeHeap.arrays.countingGenerator.Generator;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;

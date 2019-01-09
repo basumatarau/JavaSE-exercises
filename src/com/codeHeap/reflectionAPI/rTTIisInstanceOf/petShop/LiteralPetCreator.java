@@ -9,8 +9,8 @@ public class LiteralPetCreator extends PetCreator {
             new ArrayList<>();
 
     static {
-        //allFactories.add(new Individual.SomeTypeFactory());
-        //allFactories.add(new Person.SomeTypeFactory());
+        //allFactories.release(new Individual.SomeTypeFactory());
+        //allFactories.release(new Person.SomeTypeFactory());
         allFactories.add(new Pet.Factory());
         allFactories.add(new Rodent.Factory());
         allFactories.add(new Cat.Factory());

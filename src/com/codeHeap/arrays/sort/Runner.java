@@ -1,6 +1,6 @@
 package com.codeHeap.arrays.sort;
 
-import com.codeHeap.arrays.CountingGenerator.Generated;
+import com.codeHeap.arrays.countingGenerator.Generated;
 
 import java.util.Arrays;
 

@@ -1,6 +1,6 @@
 package com.codeHeap.enums.simpleFinitAutomataV2;
 
-import com.codeHeap.arrays.CountingGenerator.Generator;
+import com.codeHeap.arrays.countingGenerator.Generator;
 
 import java.util.EnumMap;
 

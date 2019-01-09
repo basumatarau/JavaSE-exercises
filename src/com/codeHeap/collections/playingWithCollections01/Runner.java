@@ -1,8 +1,8 @@
 package com.codeHeap.collections.playingWithCollections01;
 
 import com.codeHeap.collections.collectionGenerator.CollectionData;
-import com.codeHeap.arrays.CountingGenerator.Generator;
-import com.codeHeap.arrays.CountingGenerator.RandomGenerator;
+import com.codeHeap.arrays.countingGenerator.Generator;
+import com.codeHeap.arrays.countingGenerator.RandomGenerator;
 
 import java.util.*;
 
